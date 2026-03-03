@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reef Safe Sunscreen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',Helvetica,sans-serif;background:#FDF6EC;color:#1A2F38;overflow-x:hidden}
+@keyframes drift{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-10px) translateX(5px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fi{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}.fi.v{opacity:1;transform:translateY(0)}
+
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,253,248,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,213,183,.4);padding:12px 24px;display:flex;justify-content:center;gap:8px}
+.nav button{padding:10px 24px;border-radius:10px;border:none;font-family:'DM Sans',sans-serif;font-size:.88rem;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:6px;background:transparent;color:#5E7A84;font-weight:400}
+.nav button.on{background:linear-gradient(135deg,#1B7A7D,#0F5E6B);color:#fff;font-weight:600;box-shadow:0 2px 12px rgba(27,122,125,.13)}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;padding:40px 24px;background:linear-gradient(180deg,#D4F0EE 0%,#FDF6EC 40%,#FFFDF8 100%)}
+.hero .shim{position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(135deg,transparent 25%,rgba(27,122,125,.03) 30%,transparent 35%,rgba(43,165,160,.02) 55%,transparent 60%);background-size:200% 100%;animation:shimmer 8s linear infinite}
+.emo{position:absolute;opacity:.18;animation:drift 6s ease-in-out infinite}
+.hc{position:relative;z-index:1;text-align:center;max-width:800px}
+.htag{display:inline-block;padding:6px 18px;border-radius:100px;background:rgba(27,122,125,.09);border:1px solid rgba(27,122,125,.2);font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;color:#1B7A7D;margin-bottom:28px;font-weight:500}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:900;line-height:1.06;margin:0 0 20px;letter-spacing:-.02em;color:#0C3B4A}
+.hero h1 span{background:linear-gradient(135deg,#1B7A7D,#FF7F6E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(1rem,2vw,1.2rem);color:#5E7A84;max-width:560px;margin:0 auto 36px;line-height:1.75;font-weight:300}
+.htags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.htags span{padding:8px 16px;border-radius:10px;font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:6px}
+.scrollh{position:absolute;bottom:28px;color:#8FA6AE;font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;animation:drift 2.5s ease-in-out infinite}
+.wave{display:block;width:100%}
+
+.sec{padding:70px 24px;max-width:920px;margin:0 auto}
+.stag{display:inline-block;padding:4px 14px;border-radius:6px;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.sec h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.7rem,4vw,2.8rem);font-weight:700;margin:0 0 16px;color:#0C3B4A}
+
+.stats{display:flex;gap:14px;flex-wrap:wrap}
+.sc{text-align:center;padding:28px 16px;background:#fff;border-radius:16px;border:1px solid rgba(232,213,183,.4);box-shadow:0 2px 16px rgba(12,59,74,.04);flex:1;min-width:150px}
+.sn{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:700;line-height:1}
+.su{font-size:.45em;color:#5E7A84;margin-left:3px}
+.sl{font-size:.78rem;color:#5E7A84;margin-top:10px;line-height:1.4}
+
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.ic{border-radius:18px;padding:30px 24px;position:relative;overflow:hidden}
+.ic .tb{position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0}
+.ic h3{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin:10px 0 14px}
+.ic .it{display:flex;gap:8px;margin-bottom:10px;font-size:.85rem;line-height:1.6;color:#5E7A84}
+.ic .bu{font-weight:700;flex-shrink:0}
+
+.chg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
+.cw{background:#fff;border-radius:16px;padding:24px 20px;border:1px solid rgba(232,213,183,.35);box-shadow:0 2px 12px rgba(0,0,0,.03)}
+.ct{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;font-weight:600}
+.bc{display:flex;flex-direction:column;gap:10px}
+.br{display:flex;align-items:center;gap:10px}
+.bl{font-size:.72rem;color:#5E7A84;width:72px;text-align:right;flex-shrink:0}
+.bt{flex:1;height:28px;background:rgba(232,213,183,.25);border-radius:6px;overflow:hidden}
+.bf{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:.7rem;font-weight:600;color:#fff;width:0;transition:width 1s cubic-bezier(.16,1,.3,1)}
+
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:20px}
+.pc{padding:18px;border-radius:14px;text-align:center}
+.pc .ty{font-size:.76rem;color:#5E7A84;margin-bottom:6px}
+.pc .pr{font-family:'Playfair Display',Georgia,serif;font-size:1.8rem;font-weight:700}
+.pc .ci{font-size:.68rem;color:#8FA6AE;margin-top:4px}
+
+.rc{display:flex;gap:20px;padding:24px 22px;margin-bottom:12px;background:#fff;border-radius:14px;border:1px solid rgba(232,213,183,.27);box-shadow:0 1px 8px rgba(0,0,0,.02);align-items:flex-start}
+.rn{font-family:'Playfair Display',Georgia,serif;font-size:1.8rem;font-weight:900;opacity:.55;line-height:1;flex-shrink:0;width:44px}
+.rc h4{margin:0 0 6px;font-size:1rem;font-weight:600}
+.rc p{margin:0;font-size:.85rem;line-height:1.7;color:#5E7A84}
+
+.ckw{max-width:640px;margin:0 auto}
+.ckb{background:#fff;border-radius:20px;padding:36px 32px;border:1px solid rgba(232,213,183,.35);box-shadow:0 4px 24px rgba(12,59,74,.06)}
+.ckh{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.cki{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1B7A7D,#2BA5A0);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.ckb textarea{width:100%;min-height:100px;padding:14px 16px;border-radius:12px;border:1.5px solid #E8D5B7;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1A2F38;background:rgba(253,246,236,.27);resize:vertical;outline:none;transition:border-color .2s}
+.ckb textarea:focus{border-color:#1B7A7D}
+.cbtn{margin-top:14px;width:100%;padding:14px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(135deg,#1B7A7D,#0F5E6B);color:#fff;font-weight:600;font-size:.92rem;font-family:'DM Sans',sans-serif;box-shadow:0 4px 16px rgba(27,122,125,.2);transition:transform .15s}
+.cbtn:disabled{background:#ccc;cursor:not-allowed;box-shadow:none}
+.cbtn:active:not(:disabled){transform:scale(.98)}
+.res{margin-top:18px;padding:18px 20px;border-radius:14px;animation:fadeUp .4s ease}
+.rsh{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rsh .ri{font-size:1.4rem}.rsh .rl{font-weight:700;font-size:.95rem}
+.rsb{font-size:.82rem;line-height:1.6}
+.smp{margin-top:22px;padding-top:18px;border-top:1px solid rgba(232,213,183,.27)}
+.smpl{font-size:.72rem;color:#8FA6AE;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.smpb{display:flex;gap:8px;flex-wrap:wrap}
+.sb{padding:7px 14px;border-radius:8px;border:1px solid rgba(232,213,183,.55);background:rgba(253,246,236,.27);font-size:.78rem;color:#1A2F38;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.sb:hover{background:#D4F0EE}
+.fn{margin-top:16px;padding:14px 18px;border-radius:12px;background:rgba(253,246,236,.4);border:1px dashed rgba(232,213,183,.55);font-size:.78rem;color:#5E7A84;line-height:1.6;text-align:center}
+
+.foot{padding:48px 24px 36px;text-align:center;border-top:1px solid rgba(232,213,183,.35);margin-top:20px;background:linear-gradient(180deg,#FFFDF8,rgba(212,240,238,.27))}
+.foot q{display:block;font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,2.2vw,1.35rem);font-weight:400;font-style:italic;color:#1B7A7D;max-width:540px;margin:0 auto 20px;line-height:1.6;quotes:none}
+.foot .cr{font-size:.7rem;color:#8FA6AE;letter-spacing:.08em}
+.tab{display:none}.tab.on{display:block}
+@media(max-width:600px){.stats{flex-direction:column}.bl{width:55px;font-size:.65rem}.chg{grid-template-columns:1fr}.pg{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<div class="shim"></div>
+<div class="emo" style="font-size:30px;left:8%;top:20%;animation-duration:5s">&#x1FAB8;</div>
+<div class="emo" style="font-size:27px;left:24%;top:45%;animation-duration:6.2s;animation-delay:.5s">&#x1F420;</div>
+<div class="emo" style="font-size:33px;left:40%;top:22%;animation-duration:7.4s;animation-delay:1s">&#x1F41A;</div>
+<div class="emo" style="font-size:24px;left:56%;top:48%;animation-duration:8s;animation-delay:1.5s">&#x1F30A;</div>
+<div class="emo" style="font-size:36px;left:72%;top:25%;animation-duration:6.8s;animation-delay:2s">&#x1F422;</div>
+<div class="emo" style="font-size:28px;left:88%;top:42%;animation-duration:7.2s;animation-delay:2.5s">&#x2600;&#xFE0F;</div>
+<div class="hc">
+<div class="htag">Science Communication &middot; Policy Brief</div>
+<h1>Reef Safe<br><span>Sunscreen</span></h1>
+<p>How Hawaii's landmark ban reshaped a $1.88B market &mdash; and why the choices you make at the drugstore matter for oceans, equity, and your health.</p>
+<div class="htags">
+<span style="background:rgba(255,127,110,.08);border:1px solid rgba(255,127,110,.13)">&#x1F9EC; Human Health</span>
+<span style="background:rgba(27,122,125,.08);border:1px solid rgba(27,122,125,.13)">&#x1FAB8; Marine Ecology</span>
+<span style="background:rgba(255,176,136,.08);border:1px solid rgba(255,176,136,.13)">&#x2696;&#xFE0F; Market Access</span>
+</div>
+</div>
+<div class="scrollh">Scroll to explore &darr;</div>
+</section>
+
+<svg class="wave" height="60" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C240,55 480,5 720,30 S1200,55 1440,30 L1440,60 L0,60Z" fill="#D4F0EE" opacity=".5"/><path d="M0,35 C300,10 600,50 900,25 S1300,50 1440,35 L1440,60 L0,60Z" fill="#FDF6EC" opacity=".3"/></svg>
+
+<div class="nav">
+<button class="on" onclick="sw('learn',this)">&#x1F30A; The Science</button>
+<button onclick="sw('checker',this)">&#x1F50D; Is It Reef Safe?</button>
+</div>
+
+<div id="tab-learn" class="tab on">
+
+<section class="sec">
+<div class="fi"><div class="stag" style="background:rgba(255,127,110,.09);color:#E0564A">The Legislation</div>
+<h2>Hawaii Senate Bill 2571</h2></div>
+<div class="fi" style="transition-delay:.12s"><p style="font-size:1.02rem;line-height:1.8;color:#5E7A84;max-width:660px;margin-bottom:36px">Effective January 1, 2021, Hawaii became the first state to ban sunscreens containing <strong style="color:#E0564A">oxybenzone</strong> and <strong style="color:#E0564A">octinoxate</strong> &mdash; two chemical UV filters linked to coral bleaching and endocrine disruption. The ban forced a market reckoning: can we protect skin <em>and</em> sea?</p></div>
+<div class="stats fi" style="transition-delay:.2s">
+<div class="sc"><div class="sn" style="color:#1B7A7D" data-t="14000">0</div><div class="sl">tons sunscreen enters oceans yearly</div></div>
+<div class="sc"><div class="sn" style="color:#FF7F6E" data-t="300000">0</div><div class="sl">UV-caused skin cancers/year</div></div>
+<div class="sc"><div class="sn" style="color:#2BA5A0" data-t="64" data-s="%">0</div><div class="sl">shelf space gain for reef-safe</div></div>
+<div class="sc"><div class="sn" style="color:#4CAF82" data-t="96" data-s="%">0</div><div class="sl">consumers willing to switch</div></div>
+</div>
+</section>
+
+<svg class="wave" height="60" viewBox="0 0 1440 60" preserveAspectRatio="none" style="transform:scaleY(-1)"><path d="M0,30 C240,55 480,5 720,30 S1200,55 1440,30 L1440,60 L0,60Z" fill="#D4F0EE" opacity=".35"/><path d="M0,35 C300,10 600,50 900,25 S1300,50 1440,35 L1440,60 L0,60Z" fill="#FDF6EC" opacity=".25"/></svg>
+
+<section class="sec">
+<div class="fi"><div class="stag" style="background:rgba(27,122,125,.08);color:#1B7A7D">Dual Impact</div>
+<h2 style="margin-bottom:36px">People &amp; Planet</h2></div>
+<div class="cg">
+<div class="ic fi" style="background:rgba(255,228,223,.33);border:1px solid rgba(255,127,110,.13);transition-delay:.1s">
+<div class="tb" style="background:linear-gradient(90deg,#FF7F6E,rgba(255,127,110,.27))"></div>
+<div style="font-size:1.6rem">&#x1F9EC;</div><h3 style="color:#FF7F6E">Human Health</h3>
+<div class="it"><span class="bu" style="color:#FF7F6E">&rsaquo;</span><span>Oxybenzone &amp; octinoxate are endocrine-disrupting chemicals (EDCs)</span></div>
+<div class="it"><span class="bu" style="color:#FF7F6E">&rsaquo;</span><span>Linked to PCOS, affecting 6&ndash;20% of women of reproductive age</span></div>
+<div class="it"><span class="bu" style="color:#FF7F6E">&rsaquo;</span><span>Mineral alternatives (zinc oxide, titanium dioxide) provide equivalent UV protection</span></div>
+</div>
+<div class="ic fi" style="background:rgba(212,240,238,.33);border:1px solid rgba(27,122,125,.13);transition-delay:.2s">
+<div class="tb" style="background:linear-gradient(90deg,#1B7A7D,rgba(27,122,125,.27))"></div>
+<div style="font-size:1.6rem">&#x1FAB8;</div><h3 style="color:#1B7A7D">Marine Ecology</h3>
+<div class="it"><span class="bu" style="color:#1B7A7D">&rsaquo;</span><span>Chemical sunscreens cause coral bleaching and mortality in developing coral</span></div>
+<div class="it"><span class="bu" style="color:#1B7A7D">&rsaquo;</span><span>Genetic damage and induced feminization in fish populations</span></div>
+<div class="it"><span class="bu" style="color:#1B7A7D">&rsaquo;</span><span>Embryonic deformities with neurological behavioral changes</span></div>
+</div>
+<div class="ic fi" style="background:#FFF0E8;border:1px solid rgba(255,176,136,.2);transition-delay:.3s">
+<div class="tb" style="background:linear-gradient(90deg,#FFB088,rgba(255,176,136,.27))"></div>
+<div style="font-size:1.6rem">&#x2696;&#xFE0F;</div><h3 style="color:#FFB088">Equity &amp; Access</h3>
+<div class="it"><span class="bu" style="color:#FFB088">&rsaquo;</span><span>Reef-safe costs ~$3.84/oz vs $2.61/oz for conventional</span></div>
+<div class="it"><span class="bu" style="color:#FFB088">&rsaquo;</span><span>Mineral formulas can leave white cast &mdash; excluding darker skin tones</span></div>
+<div class="it"><span class="bu" style="color:#FFB088">&rsaquo;</span><span>Cost barrier disproportionately affects low-income coastal communities</span></div>
+</div>
+</div>
+</section>
+
+<svg class="wave" height="60" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C240,55 480,5 720,30 S1200,55 1440,30 L1440,60 L0,60Z" fill="#FDF6EC" opacity=".5"/><path d="M0,35 C300,10 600,50 900,25 S1300,50 1440,35 L1440,60 L0,60Z" fill="#D4F0EE" opacity=".25"/></svg>
+
+<section class="sec">
+<div class="fi"><div class="stag" style="background:rgba(255,209,102,.13);color:#B8860B">Market Analysis</div>
+<h2 style="margin-bottom:10px">The $4.38B Question</h2>
+<p style="font-size:.95rem;color:#5E7A84;max-width:580px;line-height:1.7;margin-bottom:40px">The global reef-safe sunscreen market is projected to grow from $1.88B (2026) to $4.38B by 2035. But adoption barriers persist.</p></div>
+<div class="chg">
+<div class="cw fi" style="transition-delay:.1s"><div class="ct" style="color:#1B7A7D">Why Consumers Switched</div><div class="bc" id="ch1"></div></div>
+<div class="cw fi" style="transition-delay:.2s"><div class="ct" style="color:#FF7F6E">Market Restraints</div><div class="bc" id="ch2"></div></div>
+</div>
+<div class="cw fi" style="margin-top:32px;transition-delay:.25s">
+<div class="ct" style="color:#B8860B">Price per Ounce Comparison</div>
+<div class="pg">
+<div class="pc" style="background:rgba(212,240,238,.27);border:1px solid rgba(27,122,125,.13)"><div class="ty">Reef Safe</div><div class="pr" style="color:#1B7A7D">$3.84</div><div class="ci">95% CI: $3.07 &ndash; $4.61</div></div>
+<div class="pc" style="background:rgba(255,228,223,.27);border:1px solid rgba(255,127,110,.13)"><div class="ty">Not Reef Safe</div><div class="pr" style="color:#FF7F6E">$2.61</div><div class="ci">95% CI: $1.83 &ndash; $3.38</div></div>
+<div class="pc" style="background:rgba(212,240,238,.27);border:1px solid rgba(27,122,125,.13)"><div class="ty">No Oxybenzone</div><div class="pr" style="color:#1B7A7D">$3.94</div><div class="ci">95% CI: $3.20 &ndash; $4.68</div></div>
+<div class="pc" style="background:rgba(255,228,223,.27);border:1px solid rgba(255,127,110,.13)"><div class="ty">W/ Oxybenzone</div><div class="pr" style="color:#FF7F6E">$1.83</div><div class="ci">95% CI: $1.43 &ndash; $2.24</div></div>
+</div>
+<div style="font-size:.7rem;color:#8FA6AE;margin-top:14px;font-style:italic">Data: Tsatalis et al. (2020), Journal of the American Academy of Dermatology</div>
+</div>
+</section>
+
+<svg class="wave" height="60" viewBox="0 0 1440 60" preserveAspectRatio="none" style="transform:scaleY(-1)"><path d="M0,30 C240,55 480,5 720,30 S1200,55 1440,30 L1440,60 L0,60Z" fill="#FDF6EC" opacity=".4"/><path d="M0,35 C300,10 600,50 900,25 S1300,50 1440,35 L1440,60 L0,60Z" fill="#D4F0EE" opacity=".2"/></svg>
+
+<section class="sec">
+<div class="fi"><div class="stag" style="background:rgba(76,175,130,.09);color:#4CAF82">What Comes Next</div>
+<h2 style="margin-bottom:36px">Recommendations</h2></div>
+<div class="fi" style="transition-delay:.08s"><div class="rc"><div class="rn" style="color:#1B7A7D">01</div><div><h4>Standardize &ldquo;Reef-Safe&rdquo; Labeling</h4><p>Federal agencies should mandate third-party verification of UV efficacy and environmental safety claims &mdash; reducing greenwashing and building consumer trust.</p></div></div></div>
+<div class="fi" style="transition-delay:.16s"><div class="rc"><div class="rn" style="color:#FF7F6E">02</div><div><h4>Subsidize Coastal Access</h4><p>Tax credits and public health partnerships can bring mineral-based sunscreen costs down for budget-sensitive demographics and low-income coastal communities.</p></div></div></div>
+<div class="fi" style="transition-delay:.24s"><div class="rc"><div class="rn" style="color:#FFB088">03</div><div><h4>Invest in R&amp;D + Education</h4><p>Develop cost-effective, inclusive formulations while communicating the dual health and ecological benefits through schools, beaches, and retailers.</p></div></div></div>
+<div class="fi" style="transition-delay:.32s"><div class="rc"><div class="rn" style="color:#4CAF82">04</div><div><h4>Monitor Long-Term Impact</h4><p>Tracking price trends, market share shifts, and reef recovery metrics will inform adaptive policies and demonstrate ecological outcomes.</p></div></div></div>
+</section>
+
+<section class="foot">
+<q>Every sunscreen purchase is a vote &mdash; for your health, for marine ecosystems, and for the kind of market we build.</q>
+<div class="cr">EHSC &middot; Columbia Mailman School of Public Health &middot; 2026</div>
+</section>
+</div>
+
+<div id="tab-checker" class="tab">
+<section style="padding:60px 24px 80px;background:#FFFDF8">
+<div class="fi" style="text-align:center;margin-bottom:40px">
+<div class="stag" style="background:rgba(27,122,125,.08);color:#1B7A7D">Interactive Tool</div>
+<h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.6rem,4vw,2.6rem);margin:0 0 12px;color:#0C3B4A">Is Your Sunscreen Reef Safe?</h2>
+<p style="font-size:.95rem;color:#5E7A84;max-width:500px;margin:0 auto;line-height:1.7">Paste your sunscreen's ingredient list to check for chemicals banned under Hawaii's SB 2571.</p>
+</div>
+<div class="ckw fi" style="transition-delay:.15s">
+<div class="ckb">
+<div class="ckh"><div class="cki">&#x1F50D;</div><div><div style="font-weight:600;font-size:.95rem">Ingredient Scanner</div><div style="font-size:.75rem;color:#5E7A84">Paste your sunscreen's ingredient list below</div></div></div>
+<textarea id="cinp" placeholder="e.g. Active Ingredients: Zinc Oxide 22%, Titanium Dioxide 5%..."></textarea>
+<button class="cbtn" id="cbtn" disabled onclick="chk()">Check Reef Safety</button>
+<div id="cres"></div>
+<div class="smp"><div class="smpl">Try a sample product</div>
+<div class="smpb">
+<button class="sb" onclick="ls(0)">Mineral Beach SPF 50</button>
+<button class="sb" onclick="ls(1)">UltraShield Sport SPF 70</button>
+<button class="sb" onclick="ls(2)">Daily Glow SPF 30</button>
+</div></div>
+</div>
+<div class="fn"><strong>Future feature:</strong> This checker demonstrates a planned tool that would scan product barcodes or ingredient lists against a comprehensive database of reef-harmful chemicals (oxybenzone, octinoxate, benzophenone-1, 4-methylbenzylidene camphor, and others identified by NOAA). Full implementation would include brand-level lookup and alternative product recommendations.</div>
+</div>
+</section>
+</div>
+
+<script>
+function sw(id,b){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});document.getElementById('tab-'+id).classList.add('on');document.querySelectorAll('.nav button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');setTimeout(function(){ob();ab()},100)}
+function ob(){var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.12});document.querySelectorAll('.fi:not(.v)').forEach(function(e){o.observe(e)})}
+function ac(){var o=new IntersectionObserver(function(e){e.forEach(function(x){if(!x.isIntersecting)return;var el=x.target,tg=parseInt(el.dataset.t),sf=el.dataset.s||'',d=1400,st=performance.now();function tk(n){var p=Math.min((n-st)/d,1),v=Math.round((1-Math.pow(1-p,3))*tg);el.textContent=v.toLocaleString()+sf;if(p<1)requestAnimationFrame(tk)}requestAnimationFrame(tk);o.unobserve(el)})},{threshold:.3});document.querySelectorAll('.sn[data-t]').forEach(function(e){o.observe(e)})}
+function bb(){var d1=[['Env. Reg.',55,'#1B7A7D'],['Derm. Infl.',52,'#FFB088'],['Chem. Avoid.',50,'#FF7F6E'],['Reef Concern',48,'#2BA5A0'],['Eco-tourism',45,'#4CAF82'],['Sustain.',40,'#8FA6AE']];var d2=[['Pricing',41,'#FF7F6E'],['Texture',38,'#FFB088'],['White Cast',30,'#1B7A7D'],['Awareness',28,'#2BA5A0'],['Sourcing',25,'#FFD166']];function r(id,d){var e=document.getElementById(id);if(!e)return;var h='';d.forEach(function(x){var w=(x[1]/60*100);h+='<div class="br"><div class="bl">'+x[0]+'</div><div class="bt"><div class="bf" style="--w:'+w+'%;background:'+x[2]+'">'+x[1]+'%</div></div></div>'});e.innerHTML=h}r('ch1',d1);r('ch2',d2)}
+function ab(){var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.querySelectorAll('.bf').forEach(function(b,i){setTimeout(function(){b.style.width=b.style.getPropertyValue('--w')},i*80)});o.unobserve(x.target)}})},{threshold:.2});document.querySelectorAll('.bc').forEach(function(c){o.observe(c)})}
+var sa=["Active: Zinc Oxide 22%, Titanium Dioxide 5%. Inactive: Water, Coconut Oil, Shea Butter, Vitamin E","Active: Oxybenzone 6%, Octinoxate 7.5%, Avobenzone 3%. Inactive: Water, Alcohol, Silica","Active: Zinc Oxide 18%. Inactive: Aloe Vera, Jojoba Oil, Niacinamide, Hyaluronic Acid"];
+var bn=["oxybenzone","octinoxate","benzophenone-3","ethylhexyl methoxycinnamate","bp-3"];
+var sf=["zinc oxide","titanium dioxide"];
+document.getElementById('cinp').addEventListener('input',function(){document.getElementById('cbtn').disabled=!this.value.trim();document.getElementById('cres').innerHTML=''});
+function ls(i){var t=document.getElementById('cinp');t.value=sa[i];document.getElementById('cbtn').disabled=false;document.getElementById('cres').innerHTML=''}
+function chk(){var inp=document.getElementById('cinp').value.toLowerCase(),bt=document.getElementById('cbtn'),rs=document.getElementById('cres');bt.textContent='\u23F3 Scanning...';bt.disabled=true;setTimeout(function(){var fb=bn.filter(function(b){return inp.includes(b)}),fs=sf.filter(function(s){return inp.includes(s)}),h='';if(fb.length>0){h='<div class="res" style="background:#FFE4DF;border:1px solid rgba(255,127,110,.2)"><div class="rsh"><span class="ri">\u26A0\uFE0F</span><span class="rl" style="color:#E0564A">Not Reef Safe</span></div><div class="rsb" style="color:#E0564A"><strong>Banned chemicals detected:</strong> '+fb.join(', ')+'<br>These ingredients are prohibited under Hawaii SB 2571 due to coral reef and marine ecosystem harm.</div></div>'}else if(fs.length>0){h='<div class="res" style="background:#E8F8F0;border:1px solid rgba(76,175,130,.27)"><div class="rsh"><span class="ri">\u2705</span><span class="rl" style="color:#4CAF82">Reef Safe!</span></div><div class="rsb" style="color:#4CAF82"><strong>Mineral active ingredients found:</strong> '+fs.join(', ')+'<br>These mineral UV filters are considered safe for coral reefs and marine life.</div></div>'}else{h='<div class="res" style="background:rgba(253,246,236,.4);border:1px solid rgba(232,213,183,.27)"><div class="rsh"><span class="ri">\u2753</span><span class="rl" style="color:#5E7A84">Insufficient Data</span></div><div class="rsb" style="color:#5E7A84">Could not identify known reef-harmful or reef-safe active ingredients. Try pasting the full ingredient list.</div></div>'}rs.innerHTML=h;bt.textContent='Check Reef Safety';bt.disabled=false},1500)}
+bb();ob();ac();setTimeout(ab,300);
+</script>
+</body>
+</html>
